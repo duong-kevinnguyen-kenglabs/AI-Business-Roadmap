@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clemens OS // AI-First Roadmap</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            950: '#030712',
+                            900: '#0b0f19',
+                            800: '#111827',
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                            glow: 'rgba(16, 185, 129, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .tech-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+        }
+        .glow-line {
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        /* Custom scrollbar for premium feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+    </style>
+</head>
+<body class="bg-cyber-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
+
+    <!-- Top Glow Bar -->
+    <div class="h-1 w-full glow-line"></div>
+
+    <!-- Main Navigation / Header -->
+    <header class="border-b border-zinc-800/80 bg-cyber-900/90 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center animate-pulse">
+                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tech-font tracking-tight flex items-center gap-2">
+                        CLEMENS OS <span class="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-mono">v1.1</span>
+                    </h1>
+                    <p class="text-xs text-zinc-400">Die ultimative AI-First-Firmenschaltzentrale</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6 text-sm">
+                <div class="hidden sm:flex items-center gap-2 text-zinc-400">
+                    <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span>System: <strong class="text-emerald-400">VOR DER WELLE</strong></span>
+                </div>
+                <button onclick="resetAll()" class="text-xs text-zinc-500 hover:text-red-400 border border-zinc-800 hover:border-red-500/30 px-3 py-1.5 rounded-lg transition-all duration-200">
+                    Fortschritt zurücksetzen
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT: THE MOTHERBOARD / STEP NAVIGATOR (5 Columns on Large Screen) -->
+        <section class="lg:col-span-5 flex flex-col gap-6">
+            <div class="bg-cyber-900/50 border border-zinc-800/80 rounded-2xl p-6 backdrop-blur-sm">
+                <h2 class="text-lg font-bold tech-font text-emerald-400 mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+                    Das Platinen-Framework
+                </h2>
+                <p class="text-sm text-zinc-400 mb-6">Klicke auf die einzelnen Chips der Platine, um die Taktik, Aufgaben und das jeweilige Leitfaden-Modul zu laden.</p>
+                
+                <!-- Microchip Board Layout -->
+                <div class="relative flex flex-col gap-4">
+                    <!-- Central CPU Core Box (Visual Background) -->
+                    <div class="absolute inset-y-0 left-[2.25rem] w-0.5 bg-zinc-800 z-0"></div>
+
+                    <!-- Step 1 Chip -->
+                    <button onclick="selectStep(1)" id="btn-step-1" class="w-full text-left relative z-10 flex items-center gap-4 p-4 rounded-xl border bg-cyber-900 border-zinc-800 transition-all duration-300 group">
+                        <div class="step-num-badge h-10 w-10 shrink-0 rounded-lg bg-zinc-800 text-zinc-400 font-bold flex items-center justify-center tech-font group-hover:bg-emerald-500/20 group-hover:text-emerald-400 border border-transparent group-hover:border-emerald-500/30 transition-all duration-300">
+                            01
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-xs font-mono text-zinc-500 block">SCHRITT 1</span>
+                            <h3 class="font-bold text-sm text-slate-200 group-hover:text-emerald-400 truncate transition-colors duration-200">Race Your Bar (Mindset)</h3>
+                            <p class="text-xs text-zinc-400 truncate">Das First Hour Problem überwinden</p>
+                        </div>
+                        <span id="check-s1" class="hidden text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        </span>
+                    </button>
+
+                    <!-- Step 2 Chip -->
+                    <button onclick="selectStep(2)" id="btn-step-2" class="w-full text-left relative z-10 flex items-center gap-4 p-4 rounded-xl border bg-cyber-900 border-zinc-800 transition-all duration-300 group">
+                        <div class="step-num-badge h-10 w-10 shrink-0 rounded-lg bg-zinc-800 text-zinc-400 font-bold flex items-center justify-center tech-font group-hover:bg-emerald-500/20 group-hover:text-emerald-400 border border-transparent group-hover:border-emerald-500/30 transition-all duration-300">
+                            02
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-xs font-mono text-zinc-500 block">SCHRITT 2</span>
+                            <h3 class="font-bold text-sm text-slate-200 group-hover:text-emerald-400 truncate transition-colors duration-200">Man & Machine (Erziehung)</h3>
+                            <p class="text-xs text-zinc-400 truncate">Loops statt "Vending Machine" nutzen</p>
+                        </div>
+                        <span id="check-s2" class="hidden text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        </span>
+                    </button>
+
+                    <!-- Step 3 Chip -->
+                    <button onclick="selectStep(3)" id="btn-step-3" class="w-full text-left relative z-10 flex items-center gap-4 p-4 rounded-xl border bg-cyber-900 border-zinc-800 transition-all duration-300 group">
+                        <div class="step-num-badge h-10 w-10 shrink-0 rounded-lg bg-zinc-800 text-zinc-400 font-bold flex items-center justify-center tech-font group-hover:bg-emerald-500/20 group-hover:text-emerald-400 border border-transparent group-hover:border-emerald-500/30 transition-all duration-300">
+                            03
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-xs font-mono text-zinc-500 block">SCHRITT 3</span>
+                            <h3 class="font-bold text-sm text-slate-200 group-hover:text-emerald-400 truncate transition-colors duration-200">Build your OS (Workflows)</h3>
+                            <p class="text-xs text-zinc-400 truncate">Rollen eliminieren, Prozesse spalten</p>
+                        </div>
+                        <span id="check-s3" class="hidden text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        </span>
+                    </button>
+
+                    <!-- Step 4 Chip -->
+                    <button onclick="selectStep(4)" id="btn-step-4" class="w-full text-left relative z-10 flex items-center gap-4 p-4 rounded-xl border bg-cyber-900 border-zinc-800 transition-all duration-300 group">
+                        <div class="step-num-badge h-10 w-10 shrink-0 rounded-lg bg-zinc-800 text-zinc-400 font-bold flex items-center justify-center tech-font group-hover:bg-emerald-500/20 group-hover:text-emerald-400 border border-transparent group-hover:border-emerald-500/30 transition-all duration-300">
+                            04
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-xs font-mono text-zinc-500 block">SCHRITT 4</span>
+                            <h3 class="font-bold text-sm text-slate-200 group-hover:text-emerald-400 truncate transition-colors duration-200">BYOA (Bring Your Own Agent)</h3>
+                            <p class="text-xs text-zinc-400 truncate">Das Team mit digitalen Agents hebeln</p>
+                        </div>
+                        <span id="check-s4" class="hidden text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        </span>
+                    </button>
+
+                    <!-- Step 5 Chip -->
+                    <button onclick="selectStep(5)" id="btn-step-5" class="w-full text-left relative z-10 flex items-center gap-4 p-4 rounded-xl border bg-cyber-900 border-zinc-800 transition-all duration-300 group">
+                        <div class="step-num-badge h-10 w-10 shrink-0 rounded-lg bg-zinc-800 text-zinc-400 font-bold flex items-center justify-center tech-font group-hover:bg-emerald-500/20 group-hover:text-emerald-400 border border-transparent group-hover:border-emerald-500/30 transition-all duration-300">
+                            05
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-xs font-mono text-zinc-500 block">SCHRITT 5</span>
+                            <h3 class="font-bold text-sm text-slate-200 group-hover:text-emerald-400 truncate transition-colors duration-200">Go Bomb Moment (Execution)</h3>
+                            <p class="text-xs text-zinc-400 truncate">Vom Wissens- zum Umsetzungsmonster</p>
+                        </div>
+                        <span id="check-s5" class="hidden text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- THE INTERACTIVE 20-HOUR SPRINT CHECKLIST -->
+            <div class="bg-cyber-900/50 border border-zinc-800/80 rounded-2xl p-6 backdrop-blur-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h2 class="text-lg font-bold tech-font text-emerald-400 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            Der 20-Stunden-Sprint
+                        </h2>
+                        <p class="text-xs text-zinc-400">Verfolge deine Transformation live</p>
+                    </div>
+                    <span id="sprint-percentage" class="text-sm font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">0%</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-6">
+                    <div id="sprint-progress-bar" class="bg-gradient-to-r from-emerald-500 to-cyan-500 h-full w-0 transition-all duration-500"></div>
+                </div>
+
+                <!-- Action Items with Time Weight -->
+                <div class="space-y-3">
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/30 transition-all duration-150 cursor-pointer">
+                        <input type="checkbox" id="task-1" onchange="updateSprint()" class="mt-1 accent-emerald-500 h-4 w-4 rounded bg-zinc-800 border-zinc-700">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 block font-bold">STUNDEN 1-4 (4H)</span>
+                            <span class="text-sm text-zinc-200">Radikales Workflow-Audit & Dokumentation</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/30 transition-all duration-150 cursor-pointer">
+                        <input type="checkbox" id="task-2" onchange="updateSprint()" class="mt-1 accent-emerald-500 h-4 w-4 rounded bg-zinc-800 border-zinc-700">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 block font-bold">STUNDEN 5-6 (2H)</span>
+                            <span class="text-sm text-zinc-200">Voice-First Tooling aktivieren (z.B. Whisper)</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/30 transition-all duration-150 cursor-pointer">
+                        <input type="checkbox" id="task-3" onchange="updateSprint()" class="mt-1 accent-emerald-500 h-4 w-4 rounded bg-zinc-800 border-zinc-700">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 block font-bold">STUNDEN 7-10 (4H)</span>
+                            <span class="text-sm text-zinc-200">Den ersten Prompt-Feedback-Loop trainieren</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/30 transition-all duration-150 cursor-pointer">
+                        <input type="checkbox" id="task-4" onchange="updateSprint()" class="mt-1 accent-emerald-500 h-4 w-4 rounded bg-zinc-800 border-zinc-700">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 block font-bold">STUNDEN 11-16 (6H)</span>
+                            <span class="text-sm text-zinc-200">Agents mit Tools (Gmail, Notion) verbinden</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/30 transition-all duration-150 cursor-pointer">
+                        <input type="checkbox" id="task-5" onchange="updateSprint()" class="mt-1 accent-emerald-500 h-4 w-4 rounded bg-zinc-800 border-zinc-700">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 block font-bold">STUNDEN 17-20 (4H)</span>
+                            <span class="text-sm text-zinc-200">Ersten voll-autonomen Email/Task Draft live schalten</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT: STEP MODULE DETAILS & CALCULATOR (7 Columns) -->
+        <section class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- STEP MODULE BOX (Dynamic Content) -->
+            <div class="bg-cyber-900 border border-emerald-500/20 rounded-2xl p-6 md:p-8 shadow-emerald-500/5 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 h-32 w-32 bg-emerald-500/5 blur-3xl rounded-full"></div>
+                
+                <!-- Active Content Container -->
+                <div id="step-content">
+                    <!-- Default State injected by JS -->
+                </div>
+            </div>
+
+            <!-- INTERACTIVE ROI CALCULATOR (AGENT HOUR LEVERAGE) -->
+            <div class="bg-cyber-900/80 border border-zinc-800/80 rounded-2xl p-6 backdrop-blur-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold tech-font text-slate-100">Der Agent-Hour-Hebelrechner</h2>
+                        <p class="text-xs text-zinc-400 font-mono">Workflow-Leverage analysieren</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-zinc-400 font-bold mb-2 uppercase">Wöchentliche Arbeitsstunden (Mensch)</label>
+                            <input type="number" id="calc-hours" value="40" oninput="calculateLeverage()" class="w-full bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none px-4 py-2.5 rounded-xl font-mono text-emerald-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-zinc-400 font-bold mb-2 uppercase">Primärer Workflow-Bereich</label>
+                            <select id="calc-role" onchange="calculateLeverage()" class="w-full bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none px-4 py-2.5 rounded-xl text-slate-200">
+                                <option value="0.80">Buchhaltung / Finanzen (80% autom.)</option>
+                                <option value="0.70">Content Creation / Postproduktion (70% autom.)</option>
+                                <option value="0.75">Support & Kundenservice (75% autom.)</option>
+                                <option value="0.60">Vertrieb & Kaltakquise (60% autom.)</option>
+                                <option value="0.50">Custom Administration (50% autom.)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-950 p-5 rounded-2xl border border-zinc-800 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-24 h-24 bg-emerald-500/5 blur-xl rounded-full"></div>
+                        <span class="text-xs text-zinc-500 uppercase font-mono tracking-wider">Mögliche Agent Hours</span>
+                        <div id="result-hours" class="text-5xl font-black tech-font text-emerald-400 my-2">160</div>
+                        <p class="text-xs text-zinc-400">Arbeitsstunden nachts & am Wochenende unermüdlich erledigt.</p>
+                        <div class="mt-4 text-xs font-mono bg-zinc-900 border border-zinc-800 text-slate-300 px-3 py-1.5 rounded-lg">
+                            Hebel-Faktor: <span id="result-multiplier" class="text-emerald-400 font-bold">4.0x</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Modal Popup -->
+    <div id="success-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-cyber-950/80 backdrop-blur-md px-4">
+        <div class="bg-zinc-900 border border-emerald-500 max-w-md w-full p-8 rounded-3xl text-center relative overflow-hidden shadow-emerald-500/10 shadow-2xl">
+            <div class="absolute top-0 left-0 w-full h-1 glow-line"></div>
+            <div class="h-16 w-16 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-400">
+                <svg class="w-10 h-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold tech-font text-emerald-400 mb-2">SPRINT ABSOLVIERT!</h3>
+            <p class="text-zinc-300 text-sm mb-6">Du hast die 20 Stunden Execution hinter dir und bist erfolgreich vor die Welle gesprungen. Lass das Autofahren hinter dir und fliege!</p>
+            <button onclick="closeModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-cyber-950 font-bold py-3 px-6 rounded-xl transition-all duration-200 uppercase tech-font">
+                Weiter optimieren
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 bg-cyber-900/40 py-6 text-center text-xs text-zinc-500">
+        <p>© 2026 YouTube Gem Content Analyst Group. Inspiriert von Clemens Kauschke & Tim Krasenbrink.</p>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Steps Data Object with details, actions, and custom quotes
+        const stepsData = {
+            1: {
+                title: "Race Your Bar (Mindset)",
+                motto: "Fliegen lernen, bevor die Straßen weg sind.",
+                icon: `<svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>`,
+                quote: "„The times to start flying are now before the roads are gone.“ — Erik Schmidt (Google CEO)",
+                desc: "Der radikale Charaktertest. Viele hängen in der Angst vor Fehlentscheidungen oder vergleichen sich mit dem trägen Durchschnitt. Du musst das 'First Hour Problem' brechen – die erste, echte fokussierte Stunde ohne Ablenkung ins System werfen.",
+                checklists: [
+                    "AI-Angst besiegen: AI wird Fehler machen, wie jeder neue High-Level Mitarbeiter an Tag 1.",
+                    "Das First-Hour-Problem brechen: Blocke die erste fokussierte Stunde nur für LLMs.",
+                    "Falsche Benchmarks eliminieren: Vergleiche dich nicht mit dem Durchschnitt deines Umfelds."
+                ],
+                action: "Blocke HEUTE 1 Stunde im Kalender, in der du kein Handy nutzt, sondern dich nur in LLMs (z.B. Claude) einloggst und das Model mit deinen drängendsten Fragen löcherst."
+            },
+            2: {
+                title: "Man & Machine (Die Erziehung)",
+                motto: "Erziehe die KI wie dein eigenes Kind.",
+                icon: `<svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
+                iconStyle: "text-emerald-400",
+                quote: "„The ability to express what you feel and the confidence in your own taste.“ — Rick Ruben",
+                desc: "Höre auf, AI wie eine 'Vending Machine' zu nutzen. Ein Coin rein, schlechter Output raus, enttäuscht sein. Das ist der falsche Weg. Loop das System! Korrigiere, kritisiere und feedbacke unerbittlich, bis der Output zu 100% deine Handschrift trägt.",
+                checklists: [
+                    "Voice-First Kommunikation: Nutze Diktierfunktionen, um Barrieren bei der Eingabe abzubauen.",
+                    "Das Erziehungs-Prinzip anwenden: Korrigiere die KI so lange, bis sie ein vollwertiges Backup deiner Fähigkeiten wird.",
+                    "Ego ablegen: Die Maschine hat kein Ego. Schreie sie virtuell an, wenn sie schlechte Outputs liefert, und lerne daraus."
+                ],
+                action: "Installiere Whisper / Whisperflow und diktiere ab sofort alle längeren Mails und Brainstorms direkt als rohen Text zur AI-Strukturierung."
+            },
+            3: {
+                title: "Build Your OS (Workflows > Rollen)",
+                motto: "Hör auf in Köpfen zu denken – denke in Platinen.",
+                icon: `<svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" /></svg>`,
+                quote: "„Du wirst niemals profitabel skalieren, wenn du Rollen statt Workflows automatisierst.“",
+                desc: "Unternehmer scheitern im AI-Zeitalter am 'Rollenbasierten Denken'. Ein Cutter ist keine Rolle, sondern eine Aneinanderreihung von 47 Einzelschritten. Wer diese dokumentiert, merkt schnell: 38 davon kann die Maschine sofort übernehmen.",
+                checklists: [
+                    "SOP-Dokumentation: Nimm dir eine repetitive Aufgabe und zerlege sie in jede einzelne Mikrobewegung.",
+                    "Output-basiertes Denken: Definiere das glasklare Endergebnis, anstatt nur zu sagen 'mach mal Social Media'.",
+                    "Hobbytüftler-Mindset: Werde ungeduldig und docke nacheinander Tools an dein persönliches System an."
+                ],
+                action: "Nimm dir einen Kernprozess (z.B. Rechnungsprüfung oder Lead-Recherche) und liste jeden einzelnen Schritt schriftlich auf."
+            },
+            4: {
+                title: "BYOA (Bring Your Own Agent)",
+                motto: "Das Zeitalter digitaler Angestellter ist angebrochen.",
+                icon: `<svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`,
+                quote: "„Unser KPI: 100 Agenten-Stunden pro menschliche Arbeitsstunde.“ — Clemens Kauschke",
+                desc: "Baue ein geschlossenes System aus autonomen Helfern. Verbinde deine Datenquellen (Gmail, Notion, Slack) mit API-Schnittstellen. Lass deine Agents deine Agenda prüfen, Entwürfe vorschreiben und Reports nachts um 4:30 Uhr anlegen.",
+                checklists: [
+                    "Konnektoren nutzen: Gib Modellen wie Claude/GPT kontrollierten API-Zugriff auf deine Workspaces.",
+                    "Draft-Systeme: Lass Aufgaben zu 80% vorbereiten, während du schläfst. Du machst nur noch den Feinschliff.",
+                    "Kommunikationsbrücken: Baue Agenten, die eigenständig Mails scannen und strukturierte Alerts an Slack senden."
+                ],
+                action: "Erstelle in deiner AI einen Agenten, der wöchentlich KPIs oder Statusberichte ausliest und für dich strukturiert zusammenfasst."
+            },
+            5: {
+                title: "Go Bomb Moment (Execution)",
+                motto: "Vom Wissensmonster zum Umsetzungsmonster werden.",
+                icon: `<svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+                quote: "„Es gibt ein Überangebot an Wissen, aber viel zu wenige, die es wirklich auf die Straße bringen.“",
+                desc: "Der radikale Wechsel. Speed of Implementation gewinnt. Radikales Denken bedeutet, die Dinge an der Wurzel (Radix) anzupacken, alles Bisherige über den Haufen zu werfen und das Risiko einzugehen, alte Zöpfe abzuschneiden.",
+                checklists: [
+                    "Die 1:1 Ratio: Jede Minute Wissenskonsum erfordert eine Minute direkte, schmutzige Umsetzung.",
+                    "Radikales Denken: Keine rationalen Trippelschrittchen, sondern das Fundament deiner Firma neu aufbauen.",
+                    "Skin in the game: Geh das Risiko ein, triff harte Entscheidungen und werde technologisch unbesiegbar."
+                ],
+                action: "Sperre ab sofort jede Woche 2 Termine komplett für stumpfe Optimierung und lade deinen Fortschritt hoch."
+            }
+        };
+
+        let activeStep = 1;
+
+        // On Load
+        window.onload = function() {
+            selectStep(1);
+            loadSprintProgress();
+            calculateLeverage();
+        };
+
+        // Select active Step module
+        function selectStep(stepNum) {
+            activeStep = stepNum;
+            
+            // Toggle active styles on buttons
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`btn-step-${i}`);
+                const badge = btn.querySelector('.step-num-badge');
+                if (i === stepNum) {
+                    btn.classList.add('border-emerald-500', 'bg-emerald-500/5', 'glow-border');
+                    btn.classList.remove('border-zinc-800', 'bg-cyber-900');
+                    badge.classList.add('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
+                    badge.classList.remove('bg-zinc-800', 'text-zinc-400', 'border-transparent');
+                } else {
+                    btn.classList.remove('border-emerald-500', 'bg-emerald-500/5', 'glow-border');
+                    btn.classList.add('border-zinc-800', 'bg-cyber-900');
+                    badge.classList.remove('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
+                    badge.classList.add('bg-zinc-800', 'text-zinc-400', 'border-transparent');
+                }
+            }
+
+            const data = stepsData[stepNum];
+            
+            // Build checklists markup
+            let checklistHTML = "";
+            data.checklists.forEach((item, index) => {
+                checklistHTML += `
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 h-2 w-2 rounded-full bg-emerald-400 shrink-0"></span>
+                        <span class="text-sm text-zinc-300">${item}</span>
+                    </li>
+                `;
+            });
+
+            // Set content HTML
+            document.getElementById('step-content').innerHTML = `
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl">
+                        ${data.icon}
+                    </div>
+                    <div>
+                        <span class="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">SCHRITT 0${stepNum}</span>
+                        <h2 class="text-2xl font-black tech-font text-slate-100">${data.title}</h2>
+                    </div>
+                </div>
+
+                <div class="border-l-2 border-emerald-500/30 pl-4 py-1 my-4 bg-emerald-500/5 rounded-r-xl">
+                    <p class="text-xs italic text-emerald-300 font-mono">${data.motto}</p>
+                </div>
+
+                <p class="text-sm text-zinc-400 leading-relaxed mb-6">${data.desc}</p>
+
+                <div class="bg-zinc-950 p-5 rounded-2xl border border-zinc-900 mb-6">
+                    <h4 class="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wider mb-3">Die Kerntaktiken</h4>
+                    <ul class="space-y-3">
+                        ${checklistHTML}
+                    </ul>
+                </div>
+
+                <div class="bg-zinc-950 p-5 rounded-2xl border border-zinc-900 mb-6">
+                    <h4 class="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wider mb-2">Die goldene Regel</h4>
+                    <p class="text-sm italic text-zinc-300 font-medium">${data.quote}</p>
+                </div>
+
+                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5">
+                    <h4 class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                        Deine direkte Hausaufgabe:
+                    </h4>
+                    <p class="text-sm text-slate-200">${data.action}</p>
+                    <button onclick="toggleStepCompleted(${stepNum})" id="btn-complete-step-${stepNum}" class="mt-4 w-full bg-emerald-500 hover:bg-emerald-400 text-cyber-950 font-bold py-2 px-4 rounded-xl transition-all duration-200 text-xs uppercase tech-font">
+                        Schritt als gemeistert markieren
+                    </button>
+                </div>
+            `;
+
+            updateButtonText(stepNum);
+        }
+
+        // Toggle microchip completed mark
+        function toggleStepCompleted(stepNum) {
+            const check = document.getElementById(`check-s${stepNum}`);
+            const isCompleted = check.classList.contains('hidden');
+            
+            if (isCompleted) {
+                check.classList.remove('hidden');
+                localStorage.setItem(`step-${stepNum}-completed`, "true");
+            } else {
+                check.classList.add('hidden');
+                localStorage.removeItem(`step-${stepNum}-completed`);
+            }
+            updateButtonText(stepNum);
+            checkAllCompleted();
+        }
+
+        function updateButtonText(stepNum) {
+            const btn = document.getElementById(`btn-complete-step-${stepNum}`);
+            const check = document.getElementById(`check-s${stepNum}`);
+            if (check && !check.classList.contains('hidden')) {
+                btn.innerText = "Als unvollständig markieren";
+                btn.classList.remove('bg-emerald-500');
+                btn.classList.add('bg-zinc-800', 'text-zinc-400', 'hover:bg-zinc-700');
+            } else if (btn) {
+                btn.innerText = "Schritt als gemeistert markieren";
+                btn.classList.add('bg-emerald-500');
+                btn.classList.remove('bg-zinc-800', 'text-zinc-400', 'hover:bg-zinc-700');
+            }
+        }
+
+        // Verify if all steps on the motherboard are completed
+        function checkAllCompleted() {
+            let allDone = true;
+            for (let i = 1; i <= 5; i++) {
+                const check = document.getElementById(`check-s${i}`);
+                if (check.classList.contains('hidden')) {
+                    allDone = false;
+                }
+            }
+        }
+
+        // Calculate leverage ratio dynamically
+        function calculateLeverage() {
+            const hours = parseFloat(document.getElementById('calc-hours').value) || 0;
+            const factor = parseFloat(document.getElementById('calc-role').value);
+            
+            // Standard multiplier representation: Agents run parallelly, continuously, at 5x average efficiency 
+            const agentMultiplier = 5.0; 
+            const potentialAgentHours = Math.round(hours * factor * agentMultiplier);
+            const multiplierResult = ((potentialAgentHours + hours) / hours).toFixed(1);
+
+            document.getElementById('result-hours').innerText = potentialAgentHours;
+            document.getElementById('result-multiplier').innerText = `${multiplierResult}x`;
+        }
+
+        // Checklist sprint calculation
+        function updateSprint() {
+            let totalHours = 0;
+            const hourWeights = [4, 2, 4, 6, 4]; // Total 20 Hours
+
+            for (let i = 1; i <= 5; i++) {
+                const checkbox = document.getElementById(`task-${i}`);
+                if (checkbox.checked) {
+                    totalHours += hourWeights[i-1];
+                    localStorage.setItem(`task-${i}-checked`, "true");
+                } else {
+                    localStorage.removeItem(`task-${i}-checked`);
+                }
+            }
+
+            const percentage = Math.round((totalHours / 20) * 100);
+            document.getElementById('sprint-percentage').innerText = `${percentage}%`;
+            document.getElementById('sprint-progress-bar').style.width = `${percentage}%`;
+
+            if (percentage === 100) {
+                document.getElementById('success-modal').classList.remove('hidden');
+            }
+        }
+
+        // Load persisted state from local storage
+        function loadSprintProgress() {
+            for (let i = 1; i <= 5; i++) {
+                if (localStorage.getItem(`task-${i}-checked`) === "true") {
+                    document.getElementById(`task-${i}`).checked = true;
+                }
+                if (localStorage.getItem(`step-${i}-completed`) === "true") {
+                    document.getElementById(`check-s${i}`).classList.remove('hidden');
+                }
+            }
+            updateSprint();
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+
+        // Reset progress function
+        function resetAll() {
+            for (let i = 1; i <= 5; i++) {
+                localStorage.removeItem(`task-${i}-checked`);
+                localStorage.removeItem(`step-${i}-completed`);
+                document.getElementById(`task-${i}`).checked = false;
+                document.getElementById(`check-s${i}`).classList.add('hidden');
+            }
+            updateSprint();
+            selectStep(1);
+        }
+    </script>
+</body>
+</html>
